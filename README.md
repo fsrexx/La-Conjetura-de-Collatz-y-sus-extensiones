@@ -1,3 +1,8 @@
+
+</script><script
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+  type="text/javascript">
+</script>
 # La Conjetura de Collatz y sus extensiones
  Aplicaciones escritas en Python
 
@@ -10,7 +15,7 @@ En lenguaje matemático podemos escribirlo de la siguiente forma:
 $$
 C(n)=
 \begin{cases}
-n/2 & \quad n \equiv 0(mod 2)\
-3n + 1 & \quad n \equiv 1(mod 2)
+n/2 & \quad n \equiv 0 \pmod 2 \\
+3n + 1 & \quad n \equiv 1 \pmod 2
 \end{cases}
 $$
