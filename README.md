@@ -11,7 +11,7 @@ $$C(n)=\begin{cases}
 n/2 & \quad n \equiv 0 \pmod 2 \newline
 3n + 1 & \quad n \equiv 1 \pmod 2
 \end{cases}$$
-Donde $a \equiv b \pmod c$ se lee "a es congruente con b módulo c". 
+Donde $a \equiv b \pmod c$ se lee: "a es congruente con b módulo c". 
 Esto significa que "a" y "b" dan el mismo resto cuando se realiza su división entera euclídea entre "c". 
 Es frecuente utilizar el valor del resto como valor de "b" en esta expresión. 
-En este caso, en la programación de esta fórmula, es frecuente utilizar la expresión "b = a % c", que se lee "b es el resto de la división entera de a entre c".
+En este caso, en la programación de esta fórmula, es frecuente utilizar la expresión "b = a % c", que se lee: "b es el resto de la división entera de a entre c".
