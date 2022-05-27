@@ -15,7 +15,7 @@ En lenguaje matemático podemos escribirlo de la siguiente forma:
 $$
 C(n)=
 \begin{cases}
-n/2 & \quad n \equiv 0 \pmod 2 \\
+n/2 & \quad n \equiv 0 \pmod 2 \newline
 3n + 1 & \quad n \equiv 1 \pmod 2
 \end{cases}
 $$
