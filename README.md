@@ -1,8 +1,3 @@
-
-</script><script
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
-  type="text/javascript">
-</script>
 # La Conjetura de Collatz y sus extensiones
  Aplicaciones escritas en Python
 
@@ -12,10 +7,7 @@ Aplicando C reiteradamente a cualquier n siempre llegamos a obtener 1.
 Por ejemplo, si n = 3 obtenemos la secuencia: [3, 10, 5, 16, 8, 4, 2, 1].
 
 En lenguaje matemático podemos escribirlo de la siguiente forma:
-$$
-C(n)=
-\begin{cases}
+$$C(n)=\begin{cases}
 n/2 & \quad n \equiv 0 \pmod 2 \newline
 3n + 1 & \quad n \equiv 1 \pmod 2
-\end{cases}
-$$
+\end{cases}$$
