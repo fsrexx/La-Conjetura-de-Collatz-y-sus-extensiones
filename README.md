@@ -19,3 +19,9 @@ En este caso, en la programación de esta fórmula, también es frecuente utiliz
 
 ## Generalidades
 En la carpeta "naturales" se encuentran los programas Coll-00 y Coll-01 que generan las secuencias de Collatz de n (siendo n el número natural que se entra al solicitarlo el programa). 
+Comentarios a las diferencias entre ambos programas:
+- En Coll-01 se supone cierta la Conjetura de Collatz y por eso se finaliza la búsqueda cuando se obtiene el valor 1.
+- En Coll-00 la búsqueda finaliza cuando se entra en un ciclo (valores que se repiten indefinidamente). Teoricamente funciona aunque no sea cierta la Conjetura de Collatz. El número 1 forma parte del ciclo: <4, 2, 1>.
+- El programa Coll-00 es extensible a lo números enteros, pero tanto para los números negativos como para el número 0 tiene otros ciclos terminales diferentes de <4, 2, 1>. Este aspecto lo veremos con más detalle en la extensión a los números enteros.
+
+## Ciclos
