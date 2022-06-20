@@ -38,10 +38,14 @@ Para demostrar la inexistencia de ciclos diferentes del trivial se pueden seguir
 $\langle a_2, a_3, ..., a_s, a_1 \rangle$ que contiene los mismos elementos que el ciclo anterior. A esta propiedad se le llama estabilidad de la función de Collatz respecto a los ciclos.
 2. *Relación entre pares e impares*: Sea $(b_1, b_2, ...,b_p)$ la lista de elementos pares y 
 $(c_1, c_2, ..., c_q)$ la lista de elementos impares, con 
-$s=p+q$. Si escribimos la lista completa 
-$\{b_1, ..., b_p, c_1, ..., c_q\}$ vemos que no es más que un reordenamiento de 
-$\mathcal{C}$. Aplicandole la función de Collatz tenemos 
-$\{b_1/2, ..., b_p/2, 3c_1 +1, ..., 3c_q +1\}$, que sigue teniendo los mismos elementos que 
+$s=p+q$. 
+Si escribimos la lista completa 
+$(b_1, ..., b_p, c_1, ..., c_q)$ 
+vemos que no es más que un reordenamiento de 
+$\mathcal{C}$. 
+Aplicandole la función de Collatz tenemos 
+$(b_1/2, ..., b_p/2, 3c_1 +1, ..., 3c_q +1)$
+, que sigue teniendo los mismos elementos que 
 $\mathcal{C}$. Por último, si cálculamos el producto de todos los elementos del ciclo 
 $b_1 ... b_p c_1 ... c_q = \frac{b_1}{2} ... \frac{b_p}{2} (3c_1 +1) ... (3c_q +1)$ y simplificando: 
 $$2^p=\left( 3+\frac{1}{c_1}\right) ... \left( 3+\frac{1}{c_q}\right)$$
