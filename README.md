@@ -69,11 +69,11 @@ Partiendo del programa Coll-01.py y añadiendole el módulo PyPlot de la bibliot
 
 Para n = 7:
 
-![Secuencia para n=7](imagenes\S-Coll-01-n7.png)
+![Secuencia para n=7](imagenes/S-Coll-01-n7.png)
 
 Para n = 27:
 
-![Secuencia para n=27](imagenes\S-Coll-01-n27.png)
+![Secuencia para n=27](imagenes/S-Coll-01-n27.png)
 
 Se observa un comportamiento de bruscas subidas y bajadas, lo que se conoce con el nombre de trayectoria de granizo (similar a lo que les ocurre a las gotas de granizo en el interior de las nubes).  
 Estas trayectorias (representaciones gráficas de las secuencias) están enmarcadas por dos valores: Valor máximo (ordenadas) y número de iteraciones para alcanzar el valor 1 (abscisas). Ambas variables tienen comportamientos peculiares.
@@ -85,7 +85,7 @@ El programa Faros1-01.py hace un barrido de las secuencias de 1 a n y guarda los
 
 Para n = 400:
 
-![Faros del tipo 1 para n=400](imagenes\Faros1-n400.png)
+![Faros del tipo 1 para n=400](imagenes/Faros1-n400.png)
 
 Para n = 400 se observan agrupaciones de puntos en líneas horizontales (13.120, 9.232, 4.372, …) y en líneas inclinadas (y = x, y = 3x + 1, …). Sugiere la existencia de algo parecido a un espectro (algo que se obtiene mediante una transformación del conjunto de secuencias).
 
@@ -94,7 +94,7 @@ El programa Faros2-01.py hace un barrido de las secuencias de 1 a n y guarda est
 
 Para n = 1000:
 
-![Faros del tipo 2 para n=1000](imagenes\Faros2-n1000.png)
+![Faros del tipo 2 para n=1000](imagenes/Faros2-n1000.png)
 
 **Números de iteraciones**
 
@@ -103,20 +103,20 @@ El programa Tiempos-00.py calcula estos valores haciendo un barrido de 1 a n.
 
 Para n = 20.000:
 
-![Tiempos de parada para n=20000](imagenes\Tiempos-n20000.png)
+![Tiempos de parada para n=20000](imagenes/Tiempos-n20000.png)
 
 También es interesante ver el comportamiento del tiempo hasta llegar a los diferentes Faros.  
 El tiempo para llegar a los Faros de tipo 1 se reduce notablemente respecto a los tiempos de parada (ver el programa TienposF1-00.py).
 
 Para n = 20.000:
 
-![Tiempos de parada para n=20000](imagenes\TiemposF1-n20000.png)
+![Tiempos de parada para n=20000](imagenes/TiemposF1-n20000.png)
 
 El tiempo para llegar a los Faros de tipo 2 vuelve a reducirse. 
 
 Para n = 20.000:
 
-![Tiempos de parada para n=20000](imagenes\TiemposF2-n20000.png)
+![Tiempos de parada para n=20000](imagenes/TiemposF2-n20000.png)
 
 Este efecto parece paradójico, ya que las reducciones antes de alcanzar el máximo parecen indicar que el máximo se consigue después de haber bajado del valor inicial. Es decir, primero hay bajadas o subidas seguidas de bajadas hasta valores inferiores al valor inicial y posteriormente nuevas subidas hasta alcanzar el máximo. Pero, si estos máximos se obtienen en valores inferiores al valor inicial actual, parece lógico pensar que deberían estar en la gráfica para valores iniciales anteriores. Sin embargo este "parece" no es real ya que no estamos mirando los máximos sino los valores del Faro de tipo 2.  
 En resumen, parece que hay la posibilidad de encontrar un argumento recursivo que nos conduzca a encontrar una función límite de los tiempos de los diferentes Faros.
