@@ -120,3 +120,42 @@ Para n = 20.000:
 
 Este efecto parece paradójico, ya que las reducciones antes de alcanzar el máximo parecen indicar que el máximo se consigue después de haber bajado del valor inicial. Es decir, primero hay bajadas o subidas seguidas de bajadas hasta valores inferiores al valor inicial y posteriormente nuevas subidas hasta alcanzar el máximo. Pero, si estos máximos se obtienen en valores inferiores al valor inicial actual, parece lógico pensar que deberían estar en la gráfica para valores iniciales anteriores. Sin embargo este "parece" no es real ya que no estamos mirando los máximos sino los valores del Faro de tipo 2.  
 En resumen, parece que hay la posibilidad de encontrar un argumento recursivo que nos conduzca a encontrar una función límite de los tiempos de los diferentes Faros.
+
+**Grafos de Collatz**
+
+Las secuencias de Collatz pueden verse como ramas (conjunto conectado de vértices mediante aristas) de un grafo dirigido, donde el vértice origen de cada arista tiene la etiqueta n y el vértice destino tiene la etiqueta C(n), siendo C(n) el resultado de la función de Collatz. Por lo tanto, el conjunto de ramas da lugar a un grafo que representa todas las secuencias.
+Retomando el programa Coll-00.py y utilizando el módulo Digraph de la biblioteca graphviz podemos construir el programa G-Coll-00.py (incluido en la carpeta "naturales").
+
+En la función GrColl(n, aristas) se construye el grafo, para ello se crea un contenedor de vértices “s” en el que se incluyen los nuevos vértices sin repetirlos. Para evitar las repeticiones usamos la función “n not in s” vista anteriormente. Las aristas se construyen uniendo el vértice origen con el vértice destino (antes y después de aplicar la función de Collatz). Hay dos bucles, el exterior para fabricar todas las secuencias (de 1 a n) y el interior para cada secuencia (la parte que aún no se ha incluido en secuencias anteriores).
+Es importante observar que la función “GrColl” devuelve el parámetro “aristas” modificado, ya que al tratarse de una lista es un parámetro mutable. Por dicho motio no se requiere una instrucción “return”.
+El grafo obtenido se guarda en un archivo png temporal que se muestra en una ventana usando la opción “view = True”.
+
+Para n = 7:
+
+![Grafo de Collatz para n=7](imagenes/G-Collatz-7.png)
+
+Los grafos obtenidos de esta forma son muy asimétricos. Utilizando la relación inversa de Collatz se pueden obtener grafos con un aspecto mucho más simétrico haciendo crecer las ramas de manera uniforme.
+
+**Collatz inverso**
+
+La relación inversa de Collatz no es unívoca, puede dar lugar a uno o dos valores según el tipo de vértices que estemos analizando. Por ejemplo, en el grafo anterior el vértice 10 da lugar a los valores 3 (3·3+1 = 10) y 20 (20/2 = 10), mientras que 3 solo da lugar a 6 (6/2 = 3) ya que x·3 + 1 = 3 implica x = 2/3 que no es un número natural.  
+Si consideramos tres vértices del grafo (a, b, c) conectados de la siguiente forma: a→c,b→c es evidente que si “a” es par, “b” debe ser impar, y al contrario ( si “a” es impar, “b” debe ser par). Tomemos el primer caso (“a” par), para que estos tres vértices existan se debería cumplir: “a = 2·c” y “b = (c – 1)/3”, pero para un “c” arbitrario no siempre existirá un valor “b” que cumpla esta condición y que sea impar. En conclusión “a” siempre existe y “b”, dependiendo del valor de “c”, puede existir o no. Evidentemente el mismo razonamiento vale para para el caso “a” impar (intercambiando los papeles de “a” y “b” en el razonamiento anterior).  
+La condición (c – 1)/3 entero equivale a “c%3 = 1” y la condición “[(c – 1)/3]%2 = 1” (impar) equivale a “c%2 = 0” cuando existe (c – 1)/3 entero (es decir c%3 = 1). Las condiciones “c%3 = 1” y “c%2 = 0” conjuntamente equivalen a “c%6 = 4”. Tabla explicativa:
+
+| Módulo | resto | resto | resto | resto | resto | resto |
+| -- | -- | -- | -- | -- | -- | -- |
+| %3 | 0 | 1 | 2 | 0 | 1 | 2 |
+| %2 | 0 | 1 | 0 | 1 | 0 | 1 |
+| %6 | 0 | 1 | 2 | 3 | 4 | 5 |
+
+$$C^{-1}(n)=\begin{cases}
+\{ 2n, (n-1)/3 \} & \quad n \equiv 4 \pmod 6 \newline 
+\{ 2n \} & \quad  n \not\equiv 4 \pmod 6 
+\end{cases} $$
+
+El programa G-Coll-Inv-00.py utiliza la relación inversa de Collatz y la búsqueda de vértices por el método de los niveles. El método de los niveles es adecuado para la búsqueda de vértices en un grafo con estructura de árbol. En este caso tenemos el bucle final que lo complica, pero lo hemos evitado excluyendo el vértice 1 en la búsqueda de impares y lo hemos restituido en el programa principal.
+
+Para una profundidad d = 11:
+
+![Grafo de Collatz para d=11](imagenes/G-Coll-Inv-11.png)
+
