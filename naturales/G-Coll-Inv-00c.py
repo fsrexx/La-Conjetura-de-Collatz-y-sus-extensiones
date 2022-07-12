@@ -27,21 +27,21 @@ def LongRama(r, g): # Longitud de las ramas
         for n in s: # explora los vértices existentes
             par, impar = CollInv(n)
             sn.append(par) # añade el vértice de la rama par
-            g.node(str(par), style="filled", fillcolor=Fondo(par))
+            g.node(str(par), fillcolor=Fondo(par))
             aristas([(str(par), str(n))]) # arista par
             if (not impar is None) and (impar != 1): # Si existe rama impar
             # Se excluye el 1 para evitar el bucle
                 sn.append(impar) # añade el vértice de la rama impar
-                g.node(str(impar), style="filled", fillcolor=Fondo(impar))
+                g.node(str(impar), fillcolor=Fondo(impar))
                 aristas([(str(impar), str(n))])
         s = sn # renovación del nivel
         
 d = int(input("Entrar profundidad de la búsqueda (>3): "))
 
-g = dg(name = "Collatz", )
+g = dg(name = "Collatz", node_attr={"style":"filled"})
 
-g.node("1", style="filled", fillcolor=Fondo(1))
-g.node("4", style="filled", fillcolor=Fondo(4))
+g.node("1", fillcolor=Fondo(1))
+g.node("4", fillcolor=Fondo(4))
 g.edges([("1","4")]) # Se restituye el bucle 
 LongRama(d, g) # Añade las aristas
 g.format = "png"
