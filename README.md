@@ -159,3 +159,68 @@ Para una profundidad d = 11:
 
 ![Grafo de Collatz para d=11](imagenes/G-Coll-Inv-11.png)
 
+**Aspectos topológicos del Grafo de Collatz**
+
+Como **aspecto global** podemos decir que si existe otro ciclo o alguna rama que diverge al infinito, tendremos una partición de los números naturales (una parte por cada ciclo diferente y una parte por cada rama independiente que tienda al infinito). Por lo tanto, podemos decir que la *Conjetura de Collatz es equivalente a que su grafo dirigido sea débilmente conexo* (es decir, que el grafo no dirigido subyacente sea conexo). También es equivalente a decir que *todos los números naturales se pueden obtener aplicando reiteradamente la relación inversa de Collatz*. En lenguaje matemático:
+$$\forall n \in \mathbb{N}, \exist k \in \mathbb{N}: n \in C^{-k}(1)$$
+De otra forma:
+$$\mathbb{N}=⋃_{k∈N}C^{-k}(1)$$
+Cada valor k genera un conjunto finito de números naturales que podemos interpretarlo como un nivel del grafo (distancia al elemento raíz de etiqueta 1). Estos niveles definen una partición de N. Cada elemento x del nivel k también define una partición de N (todos los elementos de los niveles inferiores a k y los generados recursivamente con la relación inversa de Collatz a partir de cada x).
+
+
+Como **aspecto local** vemos que cada vértice siempre tiene una salida, una entrada par y, dependiendo de su valor (si es congruente con 4 módulo 6), puede tener una entrada impar. Pero parte de esta información puede propagarse a lo largo de algunas ramas del grafo (en sentido inverso).   
+Por ejemplo, si miramos la rama que parte del vértice 3 podemos observar que carece de entradas impares (la no congruencia con 4 módulo 6 se propaga a lo largo de esta rama). Efectivamente la única entrada en el vértice 3 es 6, ya que la entrada n impar sería 3·n + 1 = 3 que no es un número entero. Pero todos los vértices de esta rama son de la forma 3·2r que son congruentes con 0 módulo 6 para r > 0 y congruente con 3 módulo 6 para r = 0, por lo tanto, no cumplen la congruencia con 4. Podemos decir que se trata de una rama “pelada” (sin bifurcaciones). Vemos que se transmite la congruencia 0 módulo 6.  
+Esta situación se generaliza a todos los múltiplos de tres impares (es decir de la forma 3p, siendo p cualquier impar). Efectivamente los múltiplos de 3 no son congruentes con 4 módulo 6 (los pares son congruentes con 0 y los impares con 3) y por lo tanto no pueden dar lugar a ramas impares. Los vértices de las ramas pares son de la forma 2q3p, siendo q cualquier natural, que son congruentes con 0 módulo 6 y, por lo tanto, nunca pueden dar lugar a ramas impares. Se trata de una rama “pelada”.  
+Ahora veamos lo que ocurre con los números congruentes con 1, 2 y 5 módulo 6. Como no son congruentes con 4 módulo 6 solo dan lugar a ramas pares con las siguientes secuencias inversas: (1, 2, 4), (2, 4), (5, 4). Todos terminan con valores congruentes con 4 módulo 6.  
+Finalmente los números congruentes con 4 módulo 6 tienen las dos ramas, la par que sigue la alternancia inversa (2, 4, 2, 4,…) y la impar que puede ser del tipo 1, 3 o 5.
+
+
+**Teorema de la rama pelada**: Vemos que el vértice de llegada de la rama pelada siempre nos da el resto 3 al dividir entre 6 y los siguientes el resto 0. Es decir que *las ramas peladas finalizan con un impar múltiplo de 3*. Las ramas peladas están formadas por vértices cuyas etiquetas tienen la propiedad de ser múltiplos de 3. Los vértices con etiquetas múltiplos de 3 pares se sitúan dentro de las ramas peladas y los múltiplos de 3 impares son final de ramas peladas (es decir que los múltiplos de 3 siempre están en ramas peladas).
+**Teorema de la alternancia de las ramas pares**: El análisis anterior da una información adicional para las otras ramas pares no peladas: Se trata de la alternancia de las bifurcaciones (cada vez que encontramos un resto 4 moviendonos en sentido inverso). Efectivamente, el resto de las ramas pares (no peladas) o con final impar de tipo 1 o 5, *presentan una alternancia de bifurcaciones* en las formas (siempre moviéndonos en sentido inverso): (1, 2, 4, 2, 4, …), (2, 4, 2, 4, …), (4, 2, 4, 2, …) o (5, 4, 2, 4, 2, …). Por ejemplo, en el caso de n = 13 tenemos: (1, 2, 4, 2, 4, …).
+
+Si damos colores a los vértices del grafo para los restos módulo 6, tenemos para d = 12:
+
+![Grafo de Collatz coloreado para d=12](imagenes/G-Coll-Inv-12c.png)
+
+## Secuencias compactas
+
+**Primera compactación: Secuencias de Terras**
+
+Mirando la definición de la función de Collatz se observa que para n impar el resultado 3n + 1 es par, con lo que el paso siguiente sería (3n + 1)/2. Por lo tanto, se puede acortar las secuencias de Collatz con una nueva función (propuesta por Terras y también llamada función “atajo”):
+
+$$T(n)=\begin{cases}
+n/2 & \quad n \equiv 0 \pmod 2 \newline
+(3n + 1)/2 & \quad n \equiv 1 \pmod 2
+\end{cases}$$
+
+Si comparamos las secuencias de Collatz y de Terras para el valor 7:  
+Collatz: 7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1  
+Terras: 7, 11, 17, 26, 13, 20, 10, 5, 8, 4, 2, 1  
+Se observa que las secuencias de Terras son subsecuencias de las secuencias de Collatz donde se conservan todos los números impares y algunos números pares.
+
+
+El programa G-Terr-00.py obtiene el grafo que contiene todos los vértices con etiqueta igual o inferior al número natural n. Para n = 7:
+
+![Grafo de Terras para n=7](imagenes/G-Terras-7.png)
+
+En este caso (compactación de Terras) la relación inversa será:
+
+$$T^{-1}(n)=\begin{cases}
+\{ 2n, (2n-1)/3 \} & \quad n \equiv 2 \pmod 3 \newline 
+\{ 2n \} & \quad  n \not\equiv 2 \pmod 3 
+\end{cases} $$
+
+El programa G-Terr-Inv-00c.py genera el grafo coloreado (con los mismos criterios que el grafo de Collatz). Para d = 9:
+
+![Grafo de Terras coloreado para d = 9](imagenes/G-Terras-Inv-9c.png)
+
+Se observa el cambio de los vértices con bifurcación en las ramas pares (en lugar de los vértices tipo 4, se bifurca en los de tipo 2) y en los vértices de tipo 5.
+
+**Segunda compactación: Secuencias de Siracusa**
+
+Una compactación más fuerte es la aplicación de Siracusa, que reemplaza el valor $3n + 1$ de la función de Collatz por $(3n + 1)/2^k$ siendo k la potencia de 2 más alta que divide a $3n + 1$. De esta forma la función resultante es una aplicación de los números impares en los números impares:  
+$C(2\mathbb{N})→C(2\mathbb{N})$ Siendo $C(2\mathbb{N})$ el conjunto complementario de $2\mathbb{N}$ en $\mathbb{N}$. También se puede escribir $C(2\mathbb{N})=2\mathbb{N}-1$ para $\mathbb{N}=\{1,2,3,…\}$:
+
+$$S(n)=\frac{3n+1}{2^k}$$
+
+La aplicación reiterada de esta función a un determinado número impar nos produce la secuencia de Siracusa, equivalente a la secuencia de Collatz donde se han omitido todos los números pares. *La conjetura de Collatz es equivalente a la existencia de un número q tal que para cualquier número n impar se verifica:* $S^q (n)=1$
