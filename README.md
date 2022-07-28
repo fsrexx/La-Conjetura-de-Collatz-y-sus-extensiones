@@ -2,7 +2,7 @@
  Aplicaciones escritas en Python
 
 ## Introducción
-La Conjetura de Collatz se plantea en el conjunto de los números naturales $\mathbb{N}=\{1, 2, 3, ...\}$ de forma muy simple:  
+La Conjetura de Collatz se plantea en el conjunto de los números naturales $\N=\{1, 2, 3, ...\}$ de forma muy simple:  
 Se define una función C(n) (función de Collatz) que da como resultado n/2 si n es un número par y 3·n + 1 si n es un número impar.   
 **Conjetura**: *Aplicando C reiteradamente a cualquier n siempre llegamos a obtener 1.*  
 Por ejemplo, si n = 3 obtenemos la secuencia: [3, 10, 5, 16, 8, 4, 2, 1].
@@ -162,7 +162,7 @@ Para una profundidad d = 11:
 **Aspectos topológicos del Grafo de Collatz**
 
 Como **aspecto global** podemos decir que si existe otro ciclo o alguna rama que diverge al infinito, tendremos una partición de los números naturales (una parte por cada ciclo diferente y una parte por cada rama independiente que tienda al infinito). Por lo tanto, podemos decir que la *Conjetura de Collatz es equivalente a que su grafo dirigido sea débilmente conexo* (es decir, que el grafo no dirigido subyacente sea conexo). También es equivalente a decir que *todos los números naturales se pueden obtener aplicando reiteradamente la relación inversa de Collatz*. En lenguaje matemático:
-$$\forall n \in \mathbb{N}, \exist k \in \mathbb{N}: n \in C^{-k}(1)$$
+$$\forall n \in \mathbb{N}, \exists k \in \mathbb{N}: n \in C^{-k}(1)$$
 De otra forma:
 $$\mathbb{N}=⋃_{k∈N}C^{-k}(1)$$
 Cada valor k genera un conjunto finito de números naturales que podemos interpretarlo como un nivel del grafo (distancia al elemento raíz de etiqueta 1). Estos niveles definen una partición de N. Cada elemento x del nivel k también define una partición de N (todos los elementos de los niveles inferiores a k y los generados recursivamente con la relación inversa de Collatz a partir de cada x).
@@ -175,7 +175,7 @@ Ahora veamos lo que ocurre con los números congruentes con 1, 2 y 5 módulo 6. 
 Finalmente los números congruentes con 4 módulo 6 tienen las dos ramas, la par que sigue la alternancia inversa (2, 4, 2, 4,…) y la impar que puede ser del tipo 1, 3 o 5.
 
 
-**Teorema de la rama pelada**: Vemos que el vértice de llegada de la rama pelada siempre nos da el resto 3 al dividir entre 6 y los siguientes el resto 0. Es decir que *las ramas peladas finalizan con un impar múltiplo de 3*. Las ramas peladas están formadas por vértices cuyas etiquetas tienen la propiedad de ser múltiplos de 3. Los vértices con etiquetas múltiplos de 3 pares se sitúan dentro de las ramas peladas y los múltiplos de 3 impares son final de ramas peladas (es decir que los múltiplos de 3 siempre están en ramas peladas).
+**Teorema de la rama pelada**: Vemos que el vértice de llegada de la rama pelada siempre nos da el resto 3 al dividir entre 6 y los siguientes el resto 0. Es decir que *las ramas peladas finalizan con un impar múltiplo de 3*. Las ramas peladas están formadas por vértices cuyas etiquetas tienen la propiedad de ser múltiplos de 3. Los vértices con etiquetas múltiplos de 3 pares se sitúan dentro de las ramas peladas y los múltiplos de 3 impares son final de ramas peladas (es decir que los múltiplos de 3 siempre están en ramas peladas).  
 **Teorema de la alternancia de las ramas pares**: El análisis anterior da una información adicional para las otras ramas pares no peladas: Se trata de la alternancia de las bifurcaciones (cada vez que encontramos un resto 4 moviendonos en sentido inverso). Efectivamente, el resto de las ramas pares (no peladas) o con final impar de tipo 1 o 5, *presentan una alternancia de bifurcaciones* en las formas (siempre moviéndonos en sentido inverso): (1, 2, 4, 2, 4, …), (2, 4, 2, 4, …), (4, 2, 4, 2, …) o (5, 4, 2, 4, 2, …). Por ejemplo, en el caso de n = 13 tenemos: (1, 2, 4, 2, 4, …).
 
 Si damos colores a los vértices del grafo para los restos módulo 6, tenemos para d = 12:
