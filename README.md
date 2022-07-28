@@ -71,7 +71,7 @@ por lo tanto, impar. Con esto tenemos $a_2=3a_1 + 1$, que será par,
 y $a_3=a_4/2$. Si $a_3$ fuera par $a_4=a_3/2=a_2/4=(3a_1 +1)/4$ 
 que implica $a_4 < a_1$ que contradice que $a_1$ sea el mínimo. 
 Por lo tanto, $a_3$ debe ser impar y $a_4=3a_3 +1$ será par, 
-con lo que $a_5=a_4/2$. Vemos que $a_5$ debe ser par, ya que $a_1<a_5$, 
+con lo que $a_5=a_4/2$. Vemos que $a_5$ debe ser par, ya que $a_1 < a_5$, 
 por ser $a_1$ el mínimo, lo que solo es posible con $a_1=a_5/2$.
 Finalmente el producto de todos los elementos del ciclo tendrá la forma: 
 $a_1 a_2 a_3 a_4 a_5 =\frac{a_5}{2} (3a_1 +1)\frac{a_2}{2} (3a_3 +1) \frac{a_4}{2}$, 
