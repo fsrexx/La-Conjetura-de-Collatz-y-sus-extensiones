@@ -61,13 +61,25 @@ $$2^p=\left( 3+\frac{1}{c_1}\right) ... \left( 3+\frac{1}{c_q}\right)$$
 
 Para n=1 la fórmula anterior no es compatible. Debe cumplirse: 0 < p < s  
 Para n=2 la fórmula anterior no es compatible. Por la misma razón.   
-Para n=3 es compatible con p=2 y q=1 [$2^2=(3+1/1)$], que coincide con el ciclo trivial $\langle 4, 2, 1 \rangle$.  
+Para n=3 es compatible con p=2 y q=1 [$2^2=(3+1/1)$], 
+que coincide con el ciclo trivial $\langle 4, 2, 1 \rangle$.  
 Para n=4 con p=1 es incompatible ya que $2 < (3 + ...)(3 + ...)(3 + ...)$  
 Para n=4 con p=2 es incompatible ya que $2^2 < (3 + ...)(3 + ...)$  
 Para n=4 con p=3 es incompatible ya que $2^3 > (3 + 1/r)$ para cualquier r natural.  
-Para n=5 partiremos del ciclo escrito con $a_1$ como elemento mínimo y, por lo tanto, impar. Con esto tenemos $a_2=3a_1 + 1$, que será par, y $a_3=a_4/2$. Si $a_3$ fuera par $a_4=a_3/2=a_2/4=(3a_1 +1)/4$ que implica $a_4 < a_1$ que contradice que $a_1$ sea el mínimo. Por lo tanto, $a_3$ debe ser impar y $a_4=3a_3 +1$ será par, con lo que $a_5=a_4/2$. Vemos que $a_5$ debe ser par, ya que $a_1<a_5$, por ser $a_1$ el mínimo, lo que solo es posible con $a_1=a_5/2$.
-Finalmente el producto de todos los elementos del ciclo tendrá la forma: $a_1 a_2 a_3 a_4 a_5 =\frac{a_5}{2} (3a_1 +1)\frac{a_2}{2} (3a_3 +1) \frac{a_4}{2}$, que simplificando queda: $8=(3+\frac{1}{a_1})(3+\frac{1}{a_3})$, pero esta condición no se puede cumplir con $a_1$ y $a_3$ naturales, ya que 8 < (3 + ...)(3 + ...). Por lo tanto, no existen ciclos de longitud 5.  
-Sin embargo, sí es compatible con los enteros negativos, donde existe un ciclo de longitud 5 tal y como veremos en el apartado dedicado a las extensiones.
+Para n=5 partiremos del ciclo escrito con $a_1$ como elemento mínimo y, 
+por lo tanto, impar. Con esto tenemos $a_2=3a_1 + 1$, que será par, 
+y $a_3=a_4/2$. Si $a_3$ fuera par $a_4=a_3/2=a_2/4=(3a_1 +1)/4$ 
+que implica $a_4 < a_1$ que contradice que $a_1$ sea el mínimo. 
+Por lo tanto, $a_3$ debe ser impar y $a_4=3a_3 +1$ será par, 
+con lo que $a_5=a_4/2$. Vemos que $a_5$ debe ser par, ya que $a_1<a_5$, 
+por ser $a_1$ el mínimo, lo que solo es posible con $a_1=a_5/2$.
+Finalmente el producto de todos los elementos del ciclo tendrá la forma: 
+$a_1 a_2 a_3 a_4 a_5 =\frac{a_5}{2} (3a_1 +1)\frac{a_2}{2} (3a_3 +1) \frac{a_4}{2}$, 
+que simplificando queda: $8=(3+\frac{1}{a_1})(3+\frac{1}{a_3})$, pero esta condición 
+no se puede cumplir con $a_1$ y $a_3$ naturales, ya que 8 < (3 + ...)(3 + ...). 
+Por lo tanto, no existen ciclos de longitud 5.  
+Sin embargo, sí es compatible con los enteros negativos, donde existe un ciclo de longitud 5
+ tal y como veremos en el apartado dedicado a las extensiones.
 
 ## Representaciones
 **Representación directa de las secuencias de Collatz**
