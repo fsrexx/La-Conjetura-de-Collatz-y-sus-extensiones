@@ -169,8 +169,8 @@ La condición (c – 1)/3 entero equivale a “c%3 = 1” y la condición “[(c
 | %6 | 0 | 1 | 2 | 3 | 4 | 5 |
 
 $$C^{-1}(n)=\begin{cases}
-\{ 2n, (n-1)/3 \} & \quad n \equiv 4 \pmod 6 \newline 
-\{ 2n \} & \quad  n \not\equiv 4 \pmod 6 
+\lbrace 2n, (n-1)/3 \rbrace & \quad n \equiv 4 \pmod 6 \newline 
+\lbrace 2n \rbrace & \quad  n \not\equiv 4 \pmod 6 
 \end{cases} $$
 
 El programa G-Coll-Inv-00.py utiliza la relación inversa de Collatz y la búsqueda de vértices por el método de los niveles. El método de los niveles es adecuado para la búsqueda de vértices en un grafo con estructura de árbol. En este caso tenemos el bucle final que lo complica, pero lo hemos evitado excluyendo el vértice 1 en la búsqueda de impares y lo hemos restituido en el programa principal.
@@ -226,8 +226,8 @@ El programa G-Terr-00.py obtiene el grafo que contiene todos los vértices con e
 En este caso (compactación de Terras) la relación inversa será:
 
 $$T^{-1}(n)=\begin{cases}
-\{ 2n, (2n-1)/3 \} & \quad n \equiv 2 \pmod 3 \newline 
-\{ 2n \} & \quad  n \not\equiv 2 \pmod 3 
+\lbrace 2n, (2n-1)/3 \rbrace & \quad n \equiv 2 \pmod 3 \newline 
+\lbrace 2n \rbrace & \quad  n \not\equiv 2 \pmod 3 
 \end{cases} $$
 
 El programa G-Terr-Inv-00c.py genera el grafo coloreado (con los mismos criterios que el grafo de Collatz). Para d = 9:
