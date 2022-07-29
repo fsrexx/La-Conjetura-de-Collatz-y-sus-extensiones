@@ -3,7 +3,7 @@
 
 ## Introducción
 La Conjetura de Collatz se plantea en el conjunto de los números naturales 
-$\mathbb{N}= \{ 1, 2, 3, ... \} $ 
+$\mathbb{N}= \lbrace 1, 2, 3, ... \rbrace $ 
 de forma muy simple:  
 Se define una función C(n) (función de Collatz) que da como resultado 
 n/2 si n es un número par y 3·n + 1 si n es un número impar.   
