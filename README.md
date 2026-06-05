@@ -2,10 +2,7 @@
  Aplicaciones escritas en Python
 
 ## Introducción
-La Conjetura de Collatz se plantea en el conjunto de los números naturales 
-$\mathbb{N}= \lbrace 1, 2, 3, ... \rbrace $ 
-de forma muy simple:  
-Se define una función C(n) (función de Collatz) que da como resultado 
+La Conjetura de Collatz se plantea en el conjunto de los números enteros positivos $\mathbb{N}+1= \lbrace 1, 2, 3, ... \rbrace$ de forma muy simple: Se define una función $C(n)$ (función de Collatz) que da como resultado 
 n/2 si n es un número par y 3·n + 1 si n es un número impar.   
 **Conjetura**: *Aplicando C reiteradamente a cualquier n siempre llegamos a obtener 1.*  
 Por ejemplo, si n = 3 obtenemos la secuencia: [3, 10, 5, 16, 8, 4, 2, 1].
@@ -243,4 +240,174 @@ $C(2\mathbb{N})→C(2\mathbb{N})$ Siendo $C(2\mathbb{N})$ el conjunto complement
 
 $$S(n)=\frac{3n+1}{2^k}$$
 
-La aplicación reiterada de esta función a un determinado número impar nos produce la secuencia de Siracusa, equivalente a la secuencia de Collatz donde se han omitido todos los números pares. *La conjetura de Collatz es equivalente a la existencia de un número q tal que para cualquier número n impar se verifica:* $S^q (n)=1$
+La aplicación reiterada de esta función a un determinado número impar nos produce la secuencia de Siracusa, equivalente a la secuencia de Collatz (o de Terras) donde se han omitido todos los números pares. *La conjetura de Collatz es equivalente a la existencia de un número q tal que para cualquier número n impar se verifica:* $S^q (n)=1$.  
+El programa G-Syr-00.py genera el grafo que contiene todos los vértices impares inferiores o iguales a n. Para n = 7:
+
+![Grafo de Siracusa para n = 7](imagenes/G-Siracusa-7.png)
+
+La relación inversa da como resultado una lista de vértices ascendientes en el siguiente nivel (vértices padres). Para ello hay que hacer un barrido con las potencias de 2, tal que m sea un número entero (de r = 1 a r = k, siendo k la amplitud del barrido): 
+
+$$m=\frac{2^{r}n-1}{3}$$
+
+El programa G-Syr-Inv-00c.py genera el grafo coloreado (con el criterio de los restos de 6) para la profundidad d y la amplitud k.  
+Para d = 3 y k = 6:
+
+![Grafo de Siracusa para d=3 y k=6](imagenes/G-Syr-Inv-3-6c.png)
+
+Se observa que 3 y 21 no presentan ascendientes. Efectivamente, los múltiplos de 3 (n = 3·q) darían lugar a ascendientes de la forma (2r·3·q – 1)/3, pero 2r·3·q – 1 no es divisible por 3 (da un resto 2) y, por lo tanto, no existen. En el grafo de Collatz los vértices impares múltiplos de 3 eran el origen de una rama pelada (constituida de solo números pares).  
+Salvo el bucle inicial (reducido al 1), el resto tiene una estructura de árbol de múltiples infinitos (cada nivel, salvo el nivel 0 y los vértices múltiplos de 3, tiene infinitos vértices, resultado de la suma de infinitos ascendientes de cada uno de los infinitos vértice, y además existen infinitos niveles). 
+
+Para obtener una imagen más simétrica (número de ascendientes fijo, salvo para los múltiplos de 3) se puede aumentar el valor de la amplitud hasta encontrar dicho número (nuevo valor k): Programa G-Syr-Inv-01c.py.  
+Para d = 3 y k = 3:
+
+![Grafo de Siracusa AF para d=3 y k=3](imagenes/G-Syr-Inv-AF-3-3c.png)
+
+*Una propiedad interesante*: Todos los padres $\lbrace m_1,m_2,…\rbrace$ 
+de un vértice n del Grafo de Siracusa están relacionados por la igualdad: $m_{i+1}=4·m_i+1$
+
+Efectivamente dependiendo del resto de la división entera de n entre 3 tenemos:   
+- Resto 0: No hay padres (teorema de la rama pelada).  
+- Resto 1: $m_i=(2^{k_i} ·n-1)/3$ para $k_i=2·i,i∈\mathbb{N}$.  
+    Nota: n tiene la forma 3·s+1, con lo que el numerador $2^k·3·s+2^k-1$, da un resto r congruente con $2^k-1$ mod 3 que dependiendo de k será 0 (k par) o 1 (k impar).   
+- Resto 2: $m_i=(2^{k_i} ·n-1)/3$ para $k_i=2·i-1,i∈\mathbb{N}$.  
+    Nota: n tiene la forma 3·s+2, con lo que el numerador $2^k·3·s+2^{k+1}-1$, da un resto r congruente con $2^{k+1}-1$ mod 3 que dependiendo de k será 0 (k impar) o 1 (k par).
+
+En el caso resto 1: $n=(3·m_i+1)/2^{k_i}$ con $k_i=2·i , i∈\mathbb{N}$ 
+
+> Para: $n=(3·m_{i+1}+1)/2^{k_(i+1)}$ igualando:  
+$3·m_{i+1}+1=(3·m_i+1)·2^{k_(i+1)-k_i}=4·(3·m_i+1)$, $2(i+1)-2i=2$  
+Es decir: $3·m_{i+1}=12·m_i+4-1=12·m_i+3⟹m_{i+1}=4·m_i+1$
+
+En el caso resto 2: $n=(3·m_i+1)/2^{k_i}$ con $k_i=2·i-1 , i∈\mathbb{N}$
+
+> Para: $n=(3·m_{i+1}+1)/2^{k_{i+1}}$ igualando:  
+$3·m_{i+1}+1=(3·m_i+1)·2^{k_{i+1}-k_i}=4·(3·m_i+1)$, $2(i+1)-1-(2i-1)=2$  
+Es decir: $3·m_{i+1}=12·m_i+4-1=12·m_i+3⟹m_{i+1}=4·m_i+1$
+
+Que coinciden.  
+Por lo tanto, una forma alternativa de obtener el grafo de Siracusa por el método inverso sería obtener el primer vértice padre y utilizar la relación anterior para obtener el resto de los vértices padres deseados.
+
+**Tercera compactación: Secuencias Super-Sracusa**
+
+De la misma forma que hemos pasado de los grafos de Collatz a los grafos de Siracusa, eliminando los vértices pares (proyectando sobre los impares por la división sucesiva por 2), se puede plantear un nuevo tipo de grafo (Super-Siracusa) eliminando los vértices de etiqueta múltiplo de 3, que, como hemos visto, se concentran en las ramas peladas. Es decir, un grafo sobre los impares no múltiplos de 3. Para ello basta con eliminar los múltiplos de 3, lo que equivale a evitar las ramas peladas.  
+
+Observación: Resulta evidente que los vértices impares múltiplos de tres no forman parte de ningún bucle. Por lo tanto, la Conjetura de Collatz en su aspecto de que solo existe un bucle con el 1 sigue siendo equivalente para el nuevo conjunto Super-Siracusa.
+
+El programa G-SSyr-00.py genera el grafo para todos los vértices inferiores a n (impar no múltiplo de 3).  
+Para n =23:
+
+![Grafo Super-Siracusa para n=23](imagenes/G-SuperSiracusa-23.png)
+
+Por lo indicado anteriormente sobre los vértices con etiqueta múltiplo de 3, para generar el grafo Super-Siracusa inverso basta con excluir a los múltiplos de 3 (ver programa G-SSyr-Inv_00c.py).  
+Para d = 3 y k = 3:
+
+![Grafo Super-Siracusa para d=3 y k=3](imagenes/G-SSyr-Inv-3-3c.png)
+
+Con lo que obtenemos un árbol equilibrado (cada vértice tiene 3 ascendientes, salvo el vértice raíz). Evidentemente los valores d (profundidad) y k (amplitud) pueden variar de 1 a infinito. El árbol Súper-Siracusa es doblemente infinito (en profundidad y en amplitud) y las etiquetas de sus vértices están en el conjunto $CSS=C(2\mathbb{N}∪3\mathbb{N})$ (Complemento de los naturales pares y múltiplos de 3 en N).  
+La Conjetura de Collatz en este contexto se puede formular de la siguiente forma: para cada $n∈CSS$ existe un k tal que $n∈SS^{-k}(1)$. El conjunto $SS^{-k}(1)$ es la relación inversa de SS (función Super Siracusa) aplicada k veces. Aunque $1∈SS^{-1}(1)$, ya que 1 es padre de 1, se puede omitir para evitar redundancias.  
+Por ejemplo, n = 35 conduce a k = 3, ya que $35∈SS^{-3}(1)$. Se puede escribir $f_{SS}(n)=k$ y la Conjetura de Collatz queda de la siguiente forma: *El dominio de $f_{SS}$ es CSS*.
+
+**Cuarta compactación**
+
+Si miramos la compactación de Terras sobre el conjunto CSS vemos que su aplicación inicia una secuencia ascendente (por ser impar la entrada) que continúa hasta obtener una salida par. Pero en la compactación de Siracusa se reitera la división por 2 hasta obtener un impar (que además no es múltiplo de 3 si la entrada no es múltiplo de 3). Resulta evidente que, partiendo de un número de CSS, la aplicación reiterada para la secuencia ascendente seguida de la secuencia descendente nos conduce a otro número de CSS.  
+A este proceso de ascenso y descenso le llamaremos “subciclo” (para diferenciarlo del uso de la palabra “ciclo” empleada con anterioridad para referirnos a los bucles finales). A la compactación que produce el valor final del subciclo le llamaremos cuarta compactación (ver el programa C4-00.py). 
+
+Ejemplos:
+
+- 7: [7, 13, 5, 1]
+- 25: [25, 19, 11, 13, 5, 1]
+- 29: [29, 11, 13, 5, 1]
+- 31: [31, 121, 91, 103, 175, 445, 167, 283, 319, 911, 577, 433, 325, 61, 23, 5, 1]
+
+**Comparativa de secuencias compactas**
+
+Ejemplos de secuencias para n = 7:
+1.	Secuencia de Collatz $C^k(7)$: [7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
+2.	Secuencia de Terras $T^k(7)$: [7, 11, 17, 26, 13, 20, 10, 5, 8, 4, 2, 1]
+3.	Secuencia Siracusa $S^k(7)$: [7, 11, 17, 13, 5, 1]
+4.	Secuencia Super-Siracusa $SS^k(7)$: [7, 11, 17, 13, 5, 1]
+5.	Secuencia Cuarta compactación $C4^k(7)$: [7, 13, 5, 1]
+
+Vemos que S y SS generan la misma secuencia (salvo las iniciadas con múltiplos de 3), lo que confirma lo dicho anteriormente: Los múltiplos de 3 son finales de “ramas peladas”, el Conjunto de Siracusa está formado por los naturales impares y por lo tanto si no tenemos entradas a los pares no tenemos ramas peladas, salvo sus finales (múltiplos de 3). Si no entramos ni múltiplos de 2 ni múltiplos de 3, entonces S y SS coinciden. 
+
+## Extensiones
+
+**Extensión a los números enteros**
+
+La extensión más inmediata es pasar de los números naturales ($\mathbb{N}$) a los números enteros ($\mathbb{Z}$).
+
+Nuestro primer programa (Coll-00.py) funciona para los números enteros sin necesidad de realizar ningún cambio. Esto es así porque la definición de división entera euclídea coincide con la de la programación con Python en los casos en que la usamos.
+
+La definición de división euclídea con los números naturales es la siguiente: Dados dos números naturales m (dividendo) y d (divisor), llamamos cociente (q) al mayor de los números que multiplicado por el divisor es menor o igual que el dividendo:
+
+
+$$q=max\lbrace x∈\mathbb{N}:x·d≤m\rbrace$$
+
+
+Llamaremos resto (r) a la diferencia entre el dividendo y el producto del cociente y el divisor:
+
+
+$$r=m-q·d$$
+
+
+Se verifica que: $0≤r<d$ y que: $m=q·d+r$
+
+Para la división entera de dos números enteros (m: dividendo y d: divisor), según Wikipedia, hay que hacer las siguientes precisiones para que exista un resultado y que éste sea único: 
+- El divisor debe ser no nulo ($d≠0$)
+- El resto (r) es un entero no negativo: $0≤r<|d|$
+- Se verifica que: $m=q·d+r$
+
+Sin embargo, en Python no se utiliza el criterio de que el resto sea positivo (el criterio es el primer entero más bajo que el resultado de la división de los números reales). Esto no es un problema en nuestro caso ya que solo usamos la división entera cuando el resto es cero (situación con la que coinciden ambas definiciones).
+
+Comparativa para ±7 dividido entre ±3 de diferentes interpretaciones de la división entera:
+
+||Referencia|||Euclídea||Python||C||
+|--|--|--|--|--|--|--|--|--|--|
+|Operación|Decimal|Suelo|Truncado|Cociente|Resto|Cociente|Resto|Cociente|Resto|
+|7/3|2,33|2|2|2|1|2|1|2|1|2|1|
+|-7/3|-2,33|-3|-2|-3|2|-3|2|-2|-1|
+|7/-3|-2,33|-3|-2|-2|1|-3|-2|-2|1|
+|-7/-3|2,33|2|2|3|2|2|-1|2|-1|
+
+En resumen: La división euclídea mantiene el rango del resto positivo, la división entera de Python aproxima con la función “suelo” y la división entera de C aproxima con la función “truncar” (en estos dos últimos casos el resto puede ser un valor negativo).
+
+Por lo tanto, usando el programa Coll-00.py podemos observar la existencia de tres ciclos con los números negativos:
+- $\langle-2,-1\rangle$,
+- $\langle-14,-7,-20,-10,-5\rangle$,
+- $\langle-122,-61,-182,-91,-272,-136,-68,-34,-17,-50,-25,-74,-37,-110,-55,-164,-82,-41 \rangle$
+
+También podemos observar la existencia del ciclo $\langle 0\rangle$, es decir que el 0 se reproduce indefinidamente.  
+En resumen, para los números enteros se observan 5 ciclos: el ciclo ya descrito para los números naturales, el ciclo del 0 y los tres ciclos de los enteros negativos. Evidentemente esto no implica que no existan otros ciclos para números enteros con valores absolutos muy elevados que aún no se hayan observado, ni que no existan números para los que las secuencias sean divergentes.
+
+Para obtener el grafo incluyendo el cero y los números negativos hay que modificar el programa G-Coll-00.py, entrando el rango de la búsqueda (ver el programa G-Coll-01.py).  
+Para el rango [-23, 5]:
+
+![Grafo de Collatz para enteros rango: -23, 5](imagenes/G-Collatz-rango%20-23-5.png)
+
+Por las mismas razones vistas para los números naturales procederemos a la construcción del grafo de Collatz inverso para los números enteros. Pero en este caso nos encontramos con múltiples bucles finales de secuencias, y para la construcción del grafo por el método de los niveles partiendo de los bucles finales se requiere la elección de un vértice raíz dentro de cada bucle final. La elección más natural es tomar el vértice del bucle cuya salida apunta a algún vértice de conexión entre el bucle y el resto del grafo (vértices que juegan el mismo papel que el 1 para los números naturales), es decir: -136 (también se pueden usar cualquier otro vértice del mismo bucle), -5 (también se puede usar el -14, -7, -20 o -10), -1 (también -2), 0, 1 (también 2 o 4).   
+Esto dará lugar a 5 grafos independientes: El grafo generado por el 1 es el de los números naturales, que ya hemos visto. El grafo generado por el 0 es trivial y se reduce al bucle {0}. Quedan tres grafos por analizar: los generados por -1, -5 y -136.  
+Si miramos la tabla anterior para comparar la división entera en sus diferentes versiones, vemos que el resto de la división entera euclídea y de Python, cuando el denominador es positivo (que es nuestro caso) coinciden. Por lo tanto, podemos basarnos en el programa G-Coll-Inv-00.py para adecuarlo a los nuevos requerimientos.  
+Necesitamos dos modificaciones:  
+La primera modificación es definir el vértice raíz (en el programa anterior tenía el valor 1). Utilizaremos el vértice de menor valor absoluto del bucle.   
+La segunda es incluir un diccionario que relacione el vértice raíz con el vértice de conexión que le sigue en el interior del bucle.  
+Ver el programa G-Coll-Inv-01.py.
+
+Para raíz = -17 y d = 17 se obtiene un grafo muy grande con las etiquetas de los vértices poco legibles (17 es la profundidad mínima para que salga el bucle completo):
+
+![Grafo de Collatz enteros raíz=-17 y d=17](imagenes/G-Coll-Inv-Int--17-17.png)
+
+Para raíz = -5 y d = 7:
+
+![Grafo de Collatz enteros raíz=-5 y d=7](imagenes/G-Coll-Inv-Int--5-7.png)
+
+Para raíz = -1 y d = 5:
+
+![Grafo de Collatz enteros raíz=-1 y d=5](imagenes/G-Coll-Inv-Int--1-5.png)
+
+*Formas compactas*
+
+Pasaremos directamente a la forma compacta Super-Siracusa omitiendo las formas intermedias (Terras y Siracusa). Ver el programa G-SSyr-01.py.  
+De la misma forma que en el grafo directo de Collatz, entramos el rango de búsqueda. Para el rango [-23, 5] tenemos:
+
+![Grafo SSiracusa enteros rango -23, 5](imagenes/G-SuperSiracusa-rango%20-23-5.png)
+
