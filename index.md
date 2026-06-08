@@ -4,4 +4,4 @@ title: La conjetura de Colllatz y sus extensiones
 ---
 
 ## Contenido
-(README.md)
+- .[Contenido].(README.md)
